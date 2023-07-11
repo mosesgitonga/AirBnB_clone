@@ -11,19 +11,38 @@ class BaseModel:
     """
     Base class for other models.
     """
-    def __init__(self, my_number=None, name=None):
+    def __init__(self, *args, my_number=None, name=None, **kwargs):
         """
         Initializes a new instance of the BaseModel.
 
         Args:
             my_number (int): The number associated with the instance.
             name (str): The name associated with the instance.
+            *args: List of arguments
+            **kwargs: Dictionary of Key-Value Arguments
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-        self.my_number = my_number
-        self.name = name
+        if kwargs: #If kwargs is not empty
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    continue
+                setattr(self, key, value)
+            created_at = kwargs.get("created_at")
+            updated_at = kwargs.get("updated_at")
+
+            if created_at:
+                self.created_at = datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%S.%f")
+            else:
+                self.created_at = datetime.now()
+            if updated_at:
+                self.updated_at = datetime.strptime(updated_at, "%Y-%m-%dT%H:%M:%S.%f")
+            else:
+                self.updated_at = datetime.now()
+        else: #if kwargs is empty
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            self.my_number = my_number
+            self.name = name
 
     def __str__(self):
         """
