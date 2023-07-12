@@ -4,6 +4,7 @@
 
 import uuid
 from datetime import datetime
+from models import storage
 """ nd"""
 
 
@@ -67,6 +68,7 @@ ed_at': {}, 'id': '{}', 'created_at': {}}}".format(
         Updates the `updated_at` attribute with the current datetime.
         """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """

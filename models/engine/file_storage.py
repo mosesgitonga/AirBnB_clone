@@ -4,9 +4,11 @@
 #Import The Required Modules
 import json
 import datetime
+import os
+
 
 class FileStorage:
-    """ This Class handles Serialization and 
+    """ This Class handles Serialization and
         Deserialization of objects to JSON stings
         and vice versa
     """
@@ -32,4 +34,24 @@ class FileStorage:
     def save(self):
         """ The Method Serializes __objects to the Specified json file path
         """
-        
+        obj_dict = {key: obj.to_dict() for key, obj in FileStorage.__objects.items()}
+        with open(FileStorage.__file_path, 'w')as file:
+            json.dump(obj_dict, file)
+
+    def reload(self):
+        if not os.path.is_file(FileStorage.__file_path):
+            return
+
+        with open(FileStorage.__file_path, 'r') as myfile:
+            obj_dict = json.loads(myfile)
+            obj_dict = {k: self.classes()[v["__class__"]](**v)
+                    for k, v in obj_dict.items()}
+
+            file_storage.__objects = obj_dict
+
+    @classmethod
+    def classes(cls):
+        """This method returns a dictionary of available classes"""
+        from models.base_model import BaseModel  # Import the necessary class
+        return {"BaseModel": BaseModel}  # Return a dictionary mapping class names to class objects
+
