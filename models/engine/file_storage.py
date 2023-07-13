@@ -41,6 +41,7 @@ class FileStorage:
     def reload(self):
         """reloads stored objects in file.json"""
 
+        """ Deserializes the json file """
         if not os.path.isfile(FileStorage.__file_path):
             return
 
