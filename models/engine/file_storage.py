@@ -35,14 +35,14 @@ class FileStorage:
         """ The Method Serializes __objects to the Specified json file path
         """
         obj_dict = {key: obj.to_dict() for key, obj in FileStorage.__objects.items()}
-        with open(FileStorage.__file_path, 'w')as file:
+        with open(FileStorage.__file_path, 'w', encoding='utf-8')as file:
             json.dump(obj_dict, file)
 
     def reload(self):
         if not os.path.isfile(FileStorage.__file_path):
             return
 
-        with open(FileStorage.__file_path, 'r') as myfile:
+        with open(FileStorage.__file_path, 'r', encoding='utf-8') as myfile:
             obj_dict = json.load(myfile)
             obj_dict = {k: self.classes()[v["__class__"]](**v)
                     for k, v in obj_dict.items()}

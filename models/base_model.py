@@ -39,11 +39,13 @@ class BaseModel:
             else:
                 self.updated_at = datetime.now()
         else: #if kwargs is empty
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
             self.my_number = my_number
             self.name = name
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+
+            self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """
@@ -52,16 +54,8 @@ class BaseModel:
         Returns:
             str: The string representation of the BaseModel.
         """
-        return "[{}] ({}) {{'my_number': {}, 'name': {}, 'updat\
-ed_at': {}, 'id': '{}', 'created_at': {}}}".format(
-            self.__class__.__name__,
-            self.id,
-            self.my_number,
-            self.name,
-            self.updated_at.strftime("%Y, %m, %d, %H, %M, %S, %f"),
-            self.id,
-            self.created_at.strftime("%Y, %m, %d, %H, %M, %S, %f")
-        )
+        return "[{}] ({}) {}".\
+            format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """

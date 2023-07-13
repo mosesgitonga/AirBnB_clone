@@ -6,4 +6,4 @@ from models.engine.file_storage import FileStorage
 #Import the FileStorage class from file_storage.py
 
 storage = FileStorage() #
-storage.reload
+storage.reload()
