@@ -15,7 +15,7 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb)"
-
+    valid_classes = ["BaseModel"]
     def do_quit(self, arg):
         """
         Quit command to exit the program.
@@ -76,13 +76,11 @@ class HBNBCommand(cmd.Cmd):
             #Check the Second word which is the id
             elif len(mywords) < 2:
                 print("** instance id missing **")
-            #If both exist then ...
-            else: #Concatenate both strs with a dot between
+            else:
                 key = "{}.{}".format(mywords[0], mywords[1])
                 if key not in storage.all():
                     print("** no instance found **")
-                else: #If key is found
-                    #print the string representation
+                else:
                     print(storage.all()[key])
 
     def do_destroy(self, my_line):
@@ -109,5 +107,20 @@ class HBNBCommand(cmd.Cmd):
                     del storage.all()[mykey]
                     storage.save()
 
+    def do_all(self, arg):
+        """
+        prints all strings representation based on classname or not
+        """
+        valid_classes = ["BaseModel"]
+        class_name = arg.strip() if arg else None
+        if class_name and class_name not in valid_classes:
+            print("** class doesn't exist **")
+            return
+
+        obj = storage.all()
+        if class_name:
+            obj = {key : val for key,val in obj.items() if key.split(".")[0] == class_name}
+
+        print([str(val) for val in obj.values()])
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
