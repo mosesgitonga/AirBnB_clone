@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This Script runs the FileStorage """
 
-#Import The Required Modules
+
 import json
 import datetime
 import os
@@ -13,8 +13,8 @@ class FileStorage:
         and vice versa
     """
 
-    __file_path = "file.json" #Path to the json file
-    __objects = {} #Empty Dictionary to store Objs
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """ This Method returns the __objects dictionary
@@ -28,8 +28,8 @@ class FileStorage:
             class name of the object with the object's id
             (<obj class name>.id)
         """
-        my_key = "{}.{}".format(type(obj), __name__, obj.id) #Creat the key
-        FileStorage.__objects[my_key] = obj #Add the key to the __objects dictionary
+        my_key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        FileStorage.__objects[my_key] = obj
 
     def save(self):
         """ The Method Serializes __objects to the Specified json file path
@@ -39,6 +39,8 @@ class FileStorage:
             json.dump(obj_dict, file)
 
     def reload(self):
+        """reloads stored objects in file.json"""
+
         if not os.path.isfile(FileStorage.__file_path):
             return
 
@@ -52,6 +54,5 @@ class FileStorage:
     @classmethod
     def classes(cls):
         """This method returns a dictionary of available classes"""
-        from models.base_model import BaseModel  # Import the necessary class
-        return {"BaseModel": BaseModel}  # Return a dictionary mapping class names to class objects
-
+        from models.base_model import BaseModel
+        return {"BaseModel": BaseModel}

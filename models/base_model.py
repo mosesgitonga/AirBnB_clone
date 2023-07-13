@@ -26,6 +26,10 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
+                if key == "created_at" or key == "updated_at":
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+
+
                 setattr(self, key, value)
             created_at = kwargs.get("created_at")
             updated_at = kwargs.get("updated_at")
@@ -78,8 +82,11 @@ class BaseModel:
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat()
         }
-        if self.my_number is not None:
-            data['my_number'] = self.my_number
-        if self.name is not None:
-            data['name'] = self.name
+        try:
+            if self.my_number is not None:
+                data['my_number'] = self.my_number
+            if self.name is not None:
+                data['name'] = self.name
+        except Exception:
+            pass
         return data
