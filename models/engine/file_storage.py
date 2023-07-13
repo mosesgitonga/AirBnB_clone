@@ -39,6 +39,7 @@ class FileStorage:
             json.dump(obj_dict, file)
 
     def reload(self):
+        """ Deserializes the json file """
         if not os.path.isfile(FileStorage.__file_path):
             return
 
