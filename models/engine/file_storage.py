@@ -39,15 +39,15 @@ class FileStorage:
             json.dump(obj_dict, file)
 
     def reload(self):
-        if not os.path.is_file(FileStorage.__file_path):
+        if not os.path.isfile(FileStorage.__file_path):
             return
 
         with open(FileStorage.__file_path, 'r') as myfile:
-            obj_dict = json.loads(myfile)
+            obj_dict = json.load(myfile)
             obj_dict = {k: self.classes()[v["__class__"]](**v)
                     for k, v in obj_dict.items()}
 
-            file_storage.__objects = obj_dict
+            FileStorage.__objects = obj_dict
 
     @classmethod
     def classes(cls):
