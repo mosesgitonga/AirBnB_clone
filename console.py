@@ -47,7 +47,7 @@ class HBNBCommand(cmd.Cmd):
             The Method Creates a new instance of BaseModel
             and saves it to a json file and prints its id
         """
-        if arg == "" or line is None:
+        if arg == "" or arg is None:
             print("** class name missing **")
 
         elif arg not in storage.classes():
@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             my_arg = storage.classes()[arg]()
             my_arg.save()
-            print(my_arg.id)     
+            print(my_arg.id)
 
     def do_show(self, myline):
         """
