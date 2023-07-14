@@ -3,8 +3,8 @@
 
 
 import uuid
+from models import storage
 from datetime import datetime
-from models.engine.file_storage import FileStorage
 """ nd"""
 
 
@@ -22,6 +22,7 @@ class BaseModel:
             *args: List of arguments
             **kwargs: Dictionary of Key-Value Arguments
         """
+        from models.engine.file_storage import FileStorage
         if kwargs: #If kwargs is not empty
             for key, value in kwargs.items():
                 if key == "__class__":
@@ -65,6 +66,7 @@ class BaseModel:
         """
         Updates the `updated_at` attribute with the current datetime.
         """
+        from models.engine.file_storage import FileStorage
         self.updated_at = datetime.now()
         storage.save()
 
