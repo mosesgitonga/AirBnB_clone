@@ -2,6 +2,7 @@
 """This Script runs the FileStorage """
 
 
+from models.base_model import BaseModel
 import json
 import datetime
 import os
@@ -56,4 +57,5 @@ class FileStorage:
     def classes(cls):
         """This method returns a dictionary of available classes"""
         from models.base_model import BaseModel
-        return {"BaseModel": BaseModel}
+        from models.user import User
+        return {"BaseModel": BaseModel, "User": User}

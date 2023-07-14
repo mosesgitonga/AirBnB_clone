@@ -15,7 +15,7 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb)"
-    valid_classes = ["BaseModel"]
+    valid_classes = ["BaseModel", "User"]
     def do_quit(self, arg):
         """
         Quit command to exit the program.
@@ -111,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
         """
         prints all strings representation based on classname or not
         """
-        valid_classes = ["BaseModel"]
+        valid_classes = ["BaseModel", "User"]
         class_name = arg.strip() if arg else None
         if class_name and class_name not in valid_classes:
             print("** class doesn't exist **")
@@ -124,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
         print([str(val) for val in obj.values()])
 
     def  do_update(self, args):
-        valid_classes = ["BaseModel"]
+        valid_classes = ["BaseModel", "User"]
         arg = args.strip().split()
         if not arg:
             print("** class name missing **")
