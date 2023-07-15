@@ -6,6 +6,7 @@ import json
 import datetime
 import os
 
+
 class FileStorage:
     """ This Class handles Serialization and
         Deserialization of objects to JSON stings
@@ -33,9 +34,9 @@ class FileStorage:
     def save(self):
         """ The Method Serializes __objects to the Specified json file path
         """
-        obj_dict = {key: obj.to_dict() for key, obj in FileStorage.__objects.items()}
+        o = {key: obj.to_dict() for key, obj in FileStorage.__objects.items()}
         with open(FileStorage.__file_path, 'w', encoding='utf-8')as file:
-            json.dump(obj_dict, file)
+            json.dump(o, file)
 
     def reload(self):
         """reloads stored objects in file.json"""
@@ -46,8 +47,10 @@ class FileStorage:
 
         with open(FileStorage.__file_path, 'r', encoding='utf-8') as myfile:
             obj_dict = json.load(myfile)
-            obj_dict = {k: self.classes()[v["__class__"]](**v)
-                    for k, v in obj_dict.items()}
+            obj_dict = {
+                    k: self.classes()[v["__class__"]](**v)
+                    for k, v in obj_dict.items()
+                    }
 
             FileStorage.__objects = obj_dict
 
@@ -65,8 +68,8 @@ class FileStorage:
                 "BaseModel": BaseModel,
                 "User": User,
                 "City": City,
-                "Place" : Place,
-                "State" : State,
-                "Review" : Review,
-                "Amenity" : Amenity
+                "Place": Place,
+                "State": State,
+                "Review": Review,
+                "Amenity": Amenity
                 }
