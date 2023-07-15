@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """review class"""
+from models.base_model import BaseModel
 
 
-class Review(BaseClass):
+class Review(BaseModel):
     """handle review"""
 
     place_id = ""

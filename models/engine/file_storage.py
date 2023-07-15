@@ -56,4 +56,17 @@ class FileStorage:
         """This method returns a dictionary of available classes"""
         from models.base_model import BaseModel
         from models.user import User
-        return {"BaseModel": BaseModel, "User": User}
+        from models.amenity import Amenity
+        from models.state import State
+        from models.city import City
+        from models.place import Place
+        from models.review import Review
+        return {
+                "BaseModel": BaseModel,
+                "User": User,
+                "City": City,
+                "Place" : Place,
+                "State" : State,
+                "Review" : Review,
+                "Amenity" : Amenity
+                }
