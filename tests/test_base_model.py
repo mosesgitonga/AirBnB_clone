@@ -24,6 +24,6 @@ class TestBaseModel_instantiation(unittest.TestCase):
     def test_if_BaseModel_in_storage(self):
         self.assertIn(BaseModel(), models.storage.all().values())
 
-class Test
+
 if __name__ == "__main__":
     unittest.main()
