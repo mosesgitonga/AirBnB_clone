@@ -49,7 +49,7 @@ class TestBaseModel_Instatiation(unittest.TestCase):
         my_instance_1 = BaseModel()
         sleep(0.06)
         my_instance_2 = BaseModel()
-        self.assert(my_instance_1.updated_at, my_instance_2.updated_at)
+        self.assertLess(my_instance_1.updated_at, my_instance_2.updated_at)
 
     def test_the_str_rep(self):
         """Verifies the string representation of an instance"""
@@ -90,7 +90,7 @@ class TestBaseModel_Instatiation(unittest.TestCase):
         myInstance = BaseModel("12", id="345", created_at=current_datetime_iso, updated_at=current_datetime_iso)
         self.assertEqual(myInstance.id)
         self.assertEqual(myInstance.created_at, current_datetime)
-        self.assertEqual(myInstance.updated_at, current_datetime
+        self.assertEqual(myInstance.updated_at, current_datetime)
 
 class TestBaseModel_SaveMethod(unittest.TestCase):
     """ The Class Runs tests for the Save Method in models/base_model.py """
@@ -118,7 +118,7 @@ class TestBaseModel_SaveMethod(unittest.TestCase):
         except IOError:
             pass
 
-    def test_Save_method_when_called(self)
+    def test_Save_method_when_called(self):
         """ Ensure The save method updates the updated_at attribute """
         my_instance = BaseModel()
         sleep(0.05)
@@ -162,10 +162,10 @@ class TestBaseModel_to_dict_method(unittest.TestCase):
     def test_method_returns_correct_keys(self):
         """Verifies that the method returns the correct keys"""
         myInstance = BaseModel()
-        self.assertIn.("id", myInstance.to_dict())
-        self.assertIn.("created_at", myInstance.to_dict())
-        self.assertIn.("updated_at", myInstance.to_dict())
-        self.assertIn.("__class__", myInstance.to_dict())
+        self.assertIn("id", myInstance.to_dict())
+        self.assertIn("created_at", myInstance.to_dict())
+        self.assertIn("updated_at", myInstance.to_dict())
+        self.assertIn("__class__", myInstance.to_dict())
 
     def test_check_return_type(self):
         """Verifies the attributes returned by the method are string type """
@@ -179,7 +179,7 @@ class TestBaseModel_to_dict_method(unittest.TestCase):
         current_datetime = datetime.today()
         myInstance = BaseModel()
         myInctance.id = "123456"
-	myInstance.created_at = myInstance.updated_at = current_datetime
+        myInstance.created_at = myInstance.updated_at = current_datetime
         my_dict = {
             'id': '123456',
             '__class__': 'BaseModel',
