@@ -1,14 +1,24 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
+import unittest
+from datetime import datetime
+import models
 
-my_model = BaseModel()
-my_model.name = "My First Model"
-my_model.my_number = 89
-print(my_model)
-my_model.save()
-print(my_model)
-my_model_json = my_model.to_dict()
-print(my_model_json)
-print("JSON of my_model:")
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+class TestBaseModel_instantiation(unittest.TestCase):
+    def test_if_args_no_args_instatiates(self):
+        self.assertEqual(BaseModel, type(BaseModel()))
+
+    def test_if_id_is_str(self):
+        self.assertEqual(str, type(BaseModel().id))
+
+    def test_created_at_datetme(self):
+        self.assertEqual(datetime, type(BaseModel().created_at))
+
+    def test_updated_at_datetime(self):
+        self.assertEqual(datetime, type(BaseModel().updated_at))
+
+    def test_if_BaseModel_in_storage(self):
+        self.assertIn(BaseModel(), models.storage.all().values())
+
+if __name__ == "__main__":
+    unittest.main()
