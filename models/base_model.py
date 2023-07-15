@@ -23,27 +23,29 @@ class BaseModel:
             **kwargs: Dictionary of Key-Value Arguments
         """
         from models.engine.file_storage import FileStorage
-        if kwargs: #If kwargs is not empty
+        if kwargs:
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-
-
                 setattr(self, key, value)
             created_at = kwargs.get("created_at")
             updated_at = kwargs.get("updated_at")
 
             if created_at:
-                self.created_at = datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%S.%f")
+                self.created_at = datetime.strptime(
+                        created_at, "%Y-%m-%dT%H:%M:%S.%f"
+                        )
             else:
                 self.created_at = datetime.now()
             if updated_at:
-                self.updated_at = datetime.strptime(updated_at, "%Y-%m-%dT%H:%M:%S.%f")
+                self.updated_at = datetime.strptime(
+                        updated_at, "%Y-%m-%dT%H:%M:%S.%f"
+                        )
             else:
                 self.updated_at = datetime.now()
-        else: #if kwargs is empty
+        else:
             self.my_number = my_number
             self.name = name
             self.id = str(uuid.uuid4())
