@@ -150,3 +150,61 @@ class TestBaseModel_SaveMethod(unittest.TestCase):
         myInstance_id = "BaseModel." + myInstance.id
         with open("file.json", "r") as myfile:
             self.assertIn(myInstance_id, myfile.read())
+
+class TestBaseModel_to_dict_method(unittest.TestCase):
+    """Test Cases For the to_dict method """
+
+    def test_type_of_method(self):
+        """Verify the return type is a dictionary"""
+        my_instance = BaseModel()
+        self.assertTrue(dict, type(my_instance.to_dict()))
+
+    def test_method_returns_correct_keys(self):
+        """Verifies that the method returns the correct keys"""
+        myInstance = BaseModel()
+        self.assertIn.("id", myInstance.to_dict())
+        self.assertIn.("created_at", myInstance.to_dict())
+        self.assertIn.("updated_at", myInstance.to_dict())
+        self.assertIn.("__class__", myInstance.to_dict())
+
+    def test_check_return_type(self):
+        """Verifies the attributes returned by the method are string type """
+        my_instance = BaseModel()
+        my_dict = my_instance.to_dict()
+        self.assertEqual(str, type(my_dict["created_at"]))
+        self.assertEqual(str, type(my_dict["updated_at"]))
+
+    def test_key_value_pairs(self):
+        """ Tests if the dictionary returned is correct bae on key value pairs """
+        current_datetime = datetime.today()
+        myInstance = BaseModel()
+        myInctance.id = "123456"
+	myInstance.created_at = myInstance.updated_at = current_datetime
+        my_dict = {
+            'id': '123456',
+            '__class__': 'BaseModel',
+            'created_at': current_datetime.isoformat(),
+            'updated_at': current_datetime.isoformat()
+        }
+        self.assertDictEqual(myInstance.to_dict, my_dict)
+
+    def test_difference_of_returned_dictionaries(self):
+        """This method compares the dictionary returned 
+        by the to_dict method with the __dict__ attribute
+        of a BaseModel instance
+        """
+        my_instance = BaseModel()
+        self.assertNotEqual(my_instance.to_dict(), my_instance.__dict__)
+
+    def test_method_with_args(self):
+        """This method tests if the to_dict method of
+        BaseModel raises a TypeError when passed a
+        argument
+        """
+        my_instance = BaseModel()
+        with self.assertRaises(TypeError):
+            my_instance.to_dict(None)
+
+
+if __name__ == "__main__":
+    unittest.main
