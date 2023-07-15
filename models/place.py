@@ -2,6 +2,8 @@
 """ place class"""
 
 class Place(BaseModel):
+    """city initialization"""
+
     city_id = ""
     user_id = ""
     name = ""

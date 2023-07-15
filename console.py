@@ -63,17 +63,12 @@ class HBNBCommand(cmd.Cmd):
             This Method Prints the String Representation
             of an Instance based on the class name and id
         """
-        #Check if myline is empty or none
         if myline == "" or myline is None:
             print("** class name missing **")
-        #If myline is empty then ...
         else:
-            #Split myline into words using the space char
             mywords = myline.split(' ')
-            #Check if first word is present in storage
             if mywords[0] not in storage.classes():
                 print("** class doesn't exist **")
-            #Check the Second word which is the id
             elif len(mywords) < 2:
                 print("** instance id missing **")
             else:
