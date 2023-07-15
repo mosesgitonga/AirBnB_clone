@@ -25,6 +25,7 @@ class HBNBCommand(cmd.Cmd):
             "Review",
             "State"
             ]
+
     def do_quit(self, arg):
         """
         Quit command to exit the program.
@@ -107,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
                 mykey = "{}.{}".format(mywords[0], mywords[1])
                 if mykey not in storage.all():
                     print("** no instance found **")
-                else: #Delete the instance
+                else:
                     del storage.all()[mykey]
                     storage.save()
 
@@ -123,19 +124,22 @@ class HBNBCommand(cmd.Cmd):
 
         obj = storage.all()
         if class_name:
-            obj = {key : val for key,val in obj.items() if key.split(".")[0] == class_name}
+            obj = {
+                    key: val for key, val in obj.items()
+                    if key.split(".")[0] == class_name
+                    }
 
         print([str(val) for val in obj.values()])
 
-    def  do_update(self, args):
-        valid_classes = ["BaseModel", "User", ]
+    def do_update(self, args):
+        valid_classes = ["BaseModel", "User"]
         arg = args.strip().split()
         if not arg:
             print("** class name missing **")
         elif arg[0] not in self.valid_classes:
             print("** class doesn't exist **")
         elif len(arg) < 2:
-           print("** instance id missing **")
+            print("** instance id missing **")
         elif len(arg) < 3:
             print("** attribute name missing **")
         elif len(arg) < 4:
@@ -151,6 +155,7 @@ class HBNBCommand(cmd.Cmd):
                 instance.save()
             else:
                 print("** no instance found **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
