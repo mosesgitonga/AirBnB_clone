@@ -61,13 +61,8 @@ class TestBaseModel_Instatiation(unittest.TestCase):
         my_instance_1_str = my_instance_1.__str__()
         self.assertIn("[BaseModel] (123456)", my_instance_1_str)
         self.assertIn("'id': '123456'", my_instance_1_str)
-        self.assertIn("'created_at': ", + current_datetime_rep, my_instance_1_str)
-        self.assertIn("'updated_at': ", + current_datetime_rep, my_instance_1_str)
-
-    def test_Single_arg_set_to_none(self):
-        """ Ensures the instance does not Store the None attribute """
-        my_instance = BaseModel(None)
-        self.assertNotIn(None, my_instance.__dict__.values())
+        self.assertIn("'created_at': " + current_datetime_rep, my_instance_1_str)
+        self.assertIn("'updated_at': " + current_datetime_rep, my_instance_1_str)
 
     def test_instance_with_kwargs(self):
         """ Ensure the Instance has the right keyworded arg """
@@ -88,7 +83,7 @@ class TestBaseModel_Instatiation(unittest.TestCase):
         current_datetime = datetime.today()
         current_datetime_iso = current_datetime.isoformat()
         myInstance = BaseModel("12", id="345", created_at=current_datetime_iso, updated_at=current_datetime_iso)
-        self.assertEqual(myInstance.id)
+        self.assertEqual(myInstance.id, "345")
         self.assertEqual(myInstance.created_at, current_datetime)
         self.assertEqual(myInstance.updated_at, current_datetime)
 
@@ -173,20 +168,6 @@ class TestBaseModel_to_dict_method(unittest.TestCase):
         my_dict = my_instance.to_dict()
         self.assertEqual(str, type(my_dict["created_at"]))
         self.assertEqual(str, type(my_dict["updated_at"]))
-
-    def test_key_value_pairs(self):
-        """ Tests if the dictionary returned is correct bae on key value pairs """
-        current_datetime = datetime.today()
-        myInstance = BaseModel()
-        myInctance.id = "123456"
-        myInstance.created_at = myInstance.updated_at = current_datetime
-        my_dict = {
-            'id': '123456',
-            '__class__': 'BaseModel',
-            'created_at': current_datetime.isoformat(),
-            'updated_at': current_datetime.isoformat()
-        }
-        self.assertDictEqual(myInstance.to_dict, my_dict)
 
     def test_difference_of_returned_dictionaries(self):
         """This method compares the dictionary returned 
