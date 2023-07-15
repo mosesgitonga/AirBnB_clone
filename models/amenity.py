@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""class amenity"""
+""" This Script runs the 7class amenity"""
+
 from models.base_model import BaseModel
 
 class Amenity(BaseModel):
