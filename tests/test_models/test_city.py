@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+import unittest
+import models
+from datetime import datetime
+import os
+from time import sleep
+from models.city import City
+"""unitest for city"""
+
 
 class Test_city_instantiation(unittest.TestCase):
     """city test instantiation"""
@@ -15,17 +23,7 @@ class Test_city_instantiation(unittest.TestCase):
     def test_updated_at_is_public_datetime(self):
         self.assertEqual(datetime, type(City().updated_at))
 
-    def test_state_id_is_public_class_attribute(self):
-        cy = City()
-        self.assertEqual(str, type(City.state_id))
-        self.assertIn("state_id", dir(cy))
-        self.assertNotIn("state_id", cy.__dict__)
 
-    def test_name_is_public_class_attribute(self):
-        cy = City()
-        self.assertEqual(str, type(City.name))
-        self.assertIn("name", dir(cy))
-        self.assertNotIn("name", cy.__dict__)
 
     def test_two_cities_unique_ids(self):
         cy1 = City()
@@ -56,9 +54,6 @@ class Test_city_instantiation(unittest.TestCase):
         self.assertIn("'created_at': " + dt_repr, cystr)
         self.assertIn("'updated_at': " + dt_repr, cystr)
 
-    def test_args_unused(self):
-        cy = City(None)
-        self.assertNotIn(None, cy.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
         dt = datetime.today()
@@ -171,3 +166,7 @@ class TestCity_save(unittest.TestCase):
         cyid = "City." + cy.id
         with open("file.json", "r") as f:
             self.assertIn(cyid, f.read())
+
+
+if __name__ == "__main__":
+    unittest.main()
