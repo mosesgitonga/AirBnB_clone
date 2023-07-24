@@ -1,6 +1,5 @@
-/* External Styling for the header */
-header{
-	background-color: #FF0000;
+header {
+	background-color: red;
 	height: 70px;
 	width: 100%;
 }
