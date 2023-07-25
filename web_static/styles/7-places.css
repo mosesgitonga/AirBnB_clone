@@ -1,3 +1,4 @@
+
 /* External styling for 7-index.html */
 
 .places h1{
@@ -21,3 +22,27 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+=======
+.places {
+    text-align: center;
+  }
+  .places h1 {
+    font-size: 30px;
+    text-align: left;
+  }
+  article {
+    width: 390px;
+    border: 1px solid #FF5A5F;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+  }
+  article h2 {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  footer {
+    position: relative;
+  }
